@@ -1,0 +1,65 @@
+package com.example.starterproject;
+
+import java.time.LocalTime;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Scope;
+
+import javax.validation.Validation;
+import javax.validation.ValidatorFactory;
+import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import javax.xml.validation.Validator;
+
+@SpringBootApplication
+public class StarterProjectApplication {
+
+	public static void main(String[] args) {
+		ApplicationContext context = SpringApplication.run(StarterProjectApplication.class, args);
+		
+	    Object byName = context.getBean("greeting");
+	    String byType = context.getBean(String.class);
+	    String byBoth = context.getBean("greeting", String.class);
+	    
+	    System.out.println("Are the two beans same :" + (byName==byType));
+	    System.out.println(byName);
+	    System.out.println(byType);
+	    System.out.println(byBoth);
+	    
+	    Object byName1 =context.getBean("Time");
+	    LocalTime byType1 = context.getBean(LocalTime.class);
+	    LocalTime byBoth1 = context.getBean("Time", LocalTime.class);
+	    
+	    System.out.println("Are the two beans same :" + (byName1==byType1));
+	    System.out.println(byName1);
+	    System.out.println(byType1);
+	    System.out.println(byBoth1);
+	    
+	    
+	}
+	
+	@Min (0)
+	@Max (10)
+	private int c;
+	private @Min(0) @Max(10) int a;
+	private @Min(0) @Max(10) int b;	
+	
+	@Bean
+	public String greeting() {
+        return "Hello, World";
+	}
+	
+	@Bean
+	@Scope("prototype")
+	public LocalTime Time() {
+		return LocalTime.now();
+	}
+}
+
