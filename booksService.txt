@@ -1,0 +1,81 @@
+package com.example.bookshop.service;
+
+import java.util.ArrayList;  
+import java.util.List;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import com.example.bookshop.controller.*;
+import com.example.bookshop.dto.booksDTO;
+import com.example.bookshop.model.books;  
+import com.example.bookshop.repo.booksRepository;
+
+import lombok.AllArgsConstructor;
+import com.example.bookshop.exceptions.*;
+
+@Service  
+@AllArgsConstructor
+public class booksService   
+{  
+	//wiring the repo 
+	@Autowired  
+	booksRepository booksRepository;  
+	
+	private ModelMapper mapper;
+	
+	//getting all books record by using the method findAll() of CrudRepository  
+	public List<books> getAllBooks()   
+	{  
+	List<books> books1 = new ArrayList<books>();  
+	booksRepository.findAll().forEach(books2 -> books1.add(books2));
+	return books1;  
+	}  
+	
+	//getting a specific record by using the method findById() of CrudRepository  
+	public books getBooksById(int id)   
+	{  
+		books found = this.booksRepository.findById(id).orElseThrow(BookNotFoundID::new);
+		return found;
+	}  
+
+	//saving a specific record by using the method save() of CrudRepository  
+	public void saveOrUpdate(books books1)   
+	{  
+	booksRepository.save(books1);  
+	}  
+	
+	//deleting a specific record by using the method deleteById() of CrudRepository  
+	public void delete(int id)   
+	{  
+	booksRepository.deleteById(id);
+	} 
+	
+	//updating a record  
+	public void update(books books1, int bookid)   
+	{  
+	booksRepository.save(books1);
+	}  
+	
+	//CustomQuery Sorted Grouping
+	public List<books> SortedByName()   
+	{  
+	//List<books> books1 = new ArrayList<books>(); 
+	return booksRepository.findAllSortedByName();	
+	}
+	
+	//CustomQuery find book by name or id
+	public books findbookby(String bookname,int bookid)
+	{
+		books found = this.booksRepository.findById(bookid).orElseThrow(BookNotFoundIDName::new);
+		return booksRepository.findBooksByNameAndIdJPQL(bookname, found.getBookid());
+	}
+
+}  
