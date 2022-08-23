@@ -1,0 +1,78 @@
+package com.example.bookshop.controller;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;  
+import org.springframework.web.bind.annotation.GetMapping;  
+import org.springframework.web.bind.annotation.PathVariable;  
+import org.springframework.web.bind.annotation.PostMapping;  
+import org.springframework.web.bind.annotation.PutMapping;  
+import org.springframework.web.bind.annotation.RequestBody;  
+import org.springframework.web.bind.annotation.RestController;  
+import com.example.bookshop.model.books;  
+import com.example.bookshop.service.booksService;  
+//mark class as Controller  
+
+@RestController 
+
+public class Bookcontroller {
+	
+	//auto-wire the BooksService class  
+	@Autowired  
+	booksService booksService;  
+	
+	@GetMapping("/")
+	public String greeting() { return "Welcome to the Book Shop. Please go to \"/allbooks\" for all available books";}
+	
+	//creating a get mapping that retrieves all the books detail from the database   
+	@GetMapping("/allbooks")  
+	private List<books> getAllBooks()   
+	{  
+	return booksService.getAllBooks();  
+	}  
+	
+	//creating a get mapping that retrieves the detail of a specific book  
+	@GetMapping("/book/{bookid}")  
+	private Optional<books> getBookById(@PathVariable("bookid") int bookid)   
+	{  
+	return booksService.getBookById(bookid);  
+	}  
+	
+	//creating a delete mapping that deletes a specified book  
+	@DeleteMapping("/deletebook/{bookid}")  
+	private void deleteBook(@PathVariable("bookid") int bookid)   
+	{  
+	booksService.delete(bookid);  
+	}  
+	
+	//creating post mapping that post the book detail in the database  
+	@PostMapping("/saveorupdateBook")  
+	private ResponseEntity<books> saveBook(@RequestBody books books1)   
+	{  
+		return new ResponseEntity<>(this.booksService.saveOrUpdate(books1), HttpStatus.CREATED);
+	}  
+	
+	//creating put mapping that updates the book detail   
+	@PutMapping("/saveBooks")  
+	private books update(@RequestBody books books1)   
+	{  
+	booksService.saveOrUpdate(books1);  
+	return books1;  
+	}  
+	
+	@GetMapping("/sortedbyname")  
+	private List<books> SortedByName()   
+	{  
+	return booksService.SortedByName();  
+	}
+	
+	@GetMapping("/findby/{bookname}and{bookid}")
+	private books findbookby(@PathVariable("bookname") String bookname, @PathVariable("bookid") int bookid)
+	{
+		return booksService.findbookby(bookname, bookid);
+	}
+}
