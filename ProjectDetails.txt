@@ -1,0 +1,64 @@
+Principles to Cover during Project:
+•	Agile & Project Management
+•	Databases & Cloud Fundamentals
+•	Java/Spring Boot API Development
+•	Automated Testing
+
+MoSCoW: Must features, Should features, Could features, Will not features
+
+Tasks
+1> Start with the project idea
+2> Create a ERD
+3> From ERD, get the requirements of the Entity
+4> Create an API with Entreprise standards:
+  a) Version Control
+  b) All the CRUD operations
+  c) Proper Packages, and files
+  d) Multiple profiles, as there will multiple teams 
+     working on the project in realtime
+  e) Unit Testing/Integration Testing
+  f) Try to cover 70 % Testing of the project.
+
+
+Looking forward to these things:
+
+Codebase
+•	CRUD functionality in both the API and front-end.
+•	Sensible package structure (back-end).
+•	Adherence to best practices.
+
+Testing
+•	Unit and integration testing for the project back-end.
+•	Test coverage of the src/main/java folder, aiming for 70% - 80%
+
+Continuous Integration
+•	GitHub repository utilising the feature-branch model
+•	The main branch must compile
+•	A build of the application is present in the root folder of your git repo
+o	A .jar which can be deployed from the command-line
+
+Repository & Documentation
+•	A completed project management board, including user stories, 
+	acceptance criteria, estimations via story points, and prioritisation 
+	via MoSCoW methodology.
+•	A working .gitignore for ignoring build-generated files and folders.
+•	A completed README.md, explaining how to use and test your application
+•	A documentation folder containing:
+o	A completed risk assessment, utilising a matrix, in .pdf format 
+o	At least one ERD and one UML diagram, in .png format
+o	A copy of your presentation, in .pdf format (slides only – no notes) 
+
+Presentation Guideline 
+•	Introduction: Who are you? How did you approach the specification?
+•	Concept: How did you initially approach the problem?
+•	Sprint plan: What needed to be included? What did you hope to achieve?
+•	Consultant Journey: What technologies have you learned for the project?
+•	CI: How did you approach version control?
+•	Testing: Coverage, static analysis, red-green-refactor
+•	Demonstration: Run through a couple of user stories
+•	Sprint review: What did you complete? What got left behind?
+•	Sprint retrospective: What went well? What could be improved?
+•	Conclusion: Reflections on the project, future steps, any other relevant info 
+•	Questions: Leave 5 minutes for questions at the end of the presentation
+•	Diagrams and/or screenshots used where appropriate
+•	Your presentation should last a total of 15 minutes
